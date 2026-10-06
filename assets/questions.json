@@ -1,0 +1,20 @@
+[
+    {
+        "id":1,
+        "q": "Berapakah hasil dari 5 + 7?",
+        "options": ["A. 18","B. 12","C. 14"],
+        "correct": 1
+    },
+    {
+        "id":2,
+        "q": "Bahasa pemrograman apa yang kita pakai?",
+        "options": ["A. Python","B. Java","C. C++"],
+        "correct": 0
+    },
+    {
+        "id":3,
+        "q": "Ibu Kota Indonesia Saat Ini?",
+        "options": ["A. Bandung","B. Jakarta","C. Nusantara"],
+        "correct": 2
+    }
+]
