@@ -1,0 +1,28 @@
+[
+    {
+        "id": "sobiChar",
+        "name": "Character Sobi",
+        "speed": 5,
+        "jump_power": -15,
+        "gravity": 0.8,
+        "sprites": {
+            "run": {
+                "file": "assets/images/RunSobi.png",
+                "frame_count": 8
+            },
+            "jump_up": {
+                "file": "assets/images/SobiJumpUp.png",
+                "frame_count": 4
+            },
+            "jump_fall": {
+                "file": "assets/images/SobiJumpFall.png",
+                "frame_count": 3
+            }
+        }
+    },
+    {
+        "id": "background",
+        "name": "Background Game",
+        "sprites": "assets/images/BackgroundBsi.png"
+    }
+]
