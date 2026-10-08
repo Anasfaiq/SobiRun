@@ -30,29 +30,43 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
-        screen.fill()
-
-        #render tampilan sesuai game_state
-        if game_state == "MENU":
-            print("ini buat masukkin clas dari ui")
-        elif game_state == "PLAYING":
-            if game_state == "PLAYING":
-                # Skor nambah terus setiap frame
-                score_mgr.update()
-
-            elif game_state == "GAME_OVER":
-                is_correct = ui.handle_input(event)
-                if is_correct:
+            if event.type == pygame.KEYDOWN:
+                if game_state == "MENU" and event.key == pygame.K_SPACE:
                     score_mgr.reset_score()
                     game_state = "PLAYING"
+                elif game_state == "PLAYING" and event.key == pygame.K_g:
+                    score_mgr.on_game_over()
+                    game_state = "GAME_OVER"
+                elif game_state == "GAME_OVER" and event.key == pygame.K_r:
+                    score_mgr.reset_score()
+                    game_state = "PLAYING"
+ 
 
-            #ngambil skor untuk di tampilkan screen
-            current_score = score_mgr.get_score_int()
-            high_score = score_mgr.get_high_score_int()
-            
         if game_state == "PLAYING":
             #skor bertambah otomatis seiring waktu berjalan 
             score_mgr.update()
+
+        screen.fill((0, 0, 0))
+
+        #render tampilan sesuai game_state
+        if game_state == "MENU":
+            menu.main_menu(screen)
+        elif game_state == "PLAYING":
+            menu.draw_score(screen, score_mgr.get_score_int(), score_mgr.get_high_score_int())
+            # render karakter sama obstacle disini 
+
+        elif game_state == "GAME_OVER":
+            menu.game_over(screen, score_mgr.get_score_int, score_mgr.get_high_score_int)
+
+            # elif game_state == "GAME_OVER":
+            #     is_correct = ui.handle_input(event)
+            #     if is_correct:
+            #         score_mgr.reset_score()
+            #         game_state = "PLAYING"
+
+            # #ngambil skor untuk di tampilkan screen
+            # current_score = score_mgr.get_score_int()
+            # high_score = score_mgr.get_high_score_int()
 
         pygame.display.flip()
         clock.tick(FPS) 
