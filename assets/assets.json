@@ -24,5 +24,15 @@
         "id": "background",
         "name": "Background Game",
         "sprites": "assets/images/BackgroundBsi.png"
+    },
+    {
+        "id": "obstacle1",
+        "height": 10,
+        "width": 30
+    },
+    {
+        "id": "obstacle2",
+        "height": 20,
+        "width": 10
     }
 ]

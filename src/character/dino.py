@@ -7,7 +7,7 @@ class Sobi:
         self.data = self.load_data(char_id)
 
         #ukuran
-        self.scale = 2.0
+        self.scale = 5.0
 
         #memotong gambar sprite
         sprites_info = self.data["sprites"]
@@ -32,7 +32,7 @@ class Sobi:
 
         #posisi awal
         self.image = self.frames_run[0]
-        self.ground_y = 800
+        self.ground_y = 560
         self.rect = self.image.get_rect(topleft=(50, self.ground_y))
 
         #move / pergerakan
@@ -74,6 +74,11 @@ class Sobi:
             self.vel_y = self.jump_power
             self.is_jumping = True
             self.current_frame = 0
+
+    def get_hitbox(self):
+        hitbox = self.rect.inflate(-60, -40)
+        hitbox.bottom = self.rect.bottom
+        return hitbox
 
     def update(self):
         #kalo lompat

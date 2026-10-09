@@ -4,7 +4,7 @@ from src.config import TITLE_SCREEN, SCREEN_HEIGHT, SCREEN_WIDTH
 class UI:
     def __init__(self):
         # ngatur font dan ukuran font disini
-        self.small_font = pygame.font.Font('assets/fonts/Silkscreen/Silkscreen-Regular.ttf', 40)
+        self.small_font = pygame.font.Font('assets/fonts/Silkscreen/Silkscreen-Regular.ttf', 20)
         self.big_font = pygame.font.Font('assets/fonts/Silkscreen/Silkscreen-Bold.ttf', 60)
 
         # buat ngeload title
@@ -47,7 +47,7 @@ class UI:
         # me-render teks ke surface
         game_over_surf = self.big_font.render("GAME OVER", False, self.red)
         score_surf = self.small_font.render(f"Score Akhir: {score}", False, self.white)
-        high_score_surf = self.high_score.render(f"High Score: {high_score}", False, self.white)
+        high_score_surf = self.small_font.render(f"High Score: {high_score}", False, self.white)
         restart_surf = self.small_font.render("Tekan R untuk Ulangi", False, self.white)
 
         # mengambil posisi dan menyimpan nya ke variabel agar bisa di pakai di blit
