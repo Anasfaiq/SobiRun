@@ -17,6 +17,10 @@
             "jump_fall": {
                 "file": "assets/images/SobiJumpFall.png",
                 "frame_count": 3
+            },
+            "died": {
+                "file": "assets/images/SobiDead.png",
+                "frame_count": 25
             }
         }
     },
