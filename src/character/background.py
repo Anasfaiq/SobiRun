@@ -1,5 +1,6 @@
 import json
 import pygame
+from src.config import SCREEN_WIDTH, SCREEN_HEIGHT
 
 
 class Background:
@@ -8,7 +9,8 @@ class Background:
         self.data = self.load_data(background_id)
 
         # load gambar background
-        self.image = pygame.image.load(self.data["sprites"]).convert()
+        image = pygame.image.load(self.data["sprites"]).convert()
+        self.image = pygame.transform.smoothscale(image, (SCREEN_WIDTH,SCREEN_HEIGHT))
 
         # ukuran gambar
         self.width = self.image.get_width()

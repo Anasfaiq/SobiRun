@@ -1,5 +1,6 @@
 import json 
 import pygame
+from src.config import SCREEN_HEIGHT
 
 class Sobi:
     def __init__(self, char_id="sobiChar"):
@@ -7,7 +8,7 @@ class Sobi:
         self.data = self.load_data(char_id)
 
         #ukuran
-        self.scale = 5.0
+        self.scale = 2.8
 
         #memotong gambar sprite
         sprites_info = self.data["sprites"]
@@ -25,6 +26,12 @@ class Sobi:
             self.scale,
         )
 
+        self.frames_died = self.load_sprite_sheet(
+            sprites_info["died"]["file"],
+            sprites_info["died"]["frame_count"],
+            self.scale,
+        )
+
         #animasi
         self.current_frame = 0
         self.animation_timer = 0
@@ -32,14 +39,15 @@ class Sobi:
 
         #posisi awal
         self.image = self.frames_run[0]
-        self.ground_y = 560
-        self.rect = self.image.get_rect(topleft=(50, self.ground_y))
+        self.ground_y = int(805*SCREEN_HEIGHT / 1080)
+        self.rect = self.image.get_rect(bottomleft=(50, self.ground_y))
 
         #move / pergerakan
         self.vel_y = 0
         self.jump_power = self.data["jump_power"]
         self.gravity = self.data["gravity"]
         self.is_jumping = False
+        self.is_alive = True
 
     def load_data(self, char_id):
         with open("assets/assets.json","r") as f:
@@ -75,12 +83,35 @@ class Sobi:
             self.is_jumping = True
             self.current_frame = 0
 
+    def die(self):
+        if self.is_alive:
+            self.is_alive = False
+            self.is_jumping = False
+            self.vel_y = 0
+            self.current_frame = 0
+            self.animation_timer = 0
+
+    def death_finished(self):
+        return not self.is_alive and self.current_frame >= len(self.frames_died) - 1
+
     def get_hitbox(self):
         hitbox = self.rect.inflate(-60, -40)
         hitbox.bottom = self.rect.bottom
         return hitbox
 
     def update(self):
+        if not self.is_alive:
+            self.animation_timer += 1
+            if self.animation_timer >= self.animation_speed:
+                self.animation_timer = 0
+                # berhenti di frame terakhir, tidak looping
+                if self.current_frame < len(self.frames_died) - 1:
+                    self.current_frame += 1
+            self.image = self.frames_died[int(self.current_frame)]
+            self.rect = self.image.get_rect(bottomleft=(self.rect.left, self.ground_y))
+            return
+        
+        
         #kalo lompat
         if self.is_jumping:
             self.vel_y += self.gravity
@@ -101,11 +132,12 @@ class Sobi:
             self.current_frame += 0.2
 
             #mendarat
-            if self.rect.y >= self.ground_y:
-                self.rect.y = self.ground_y
+            if self.rect.bottom >= self.ground_y:
+                self.rect.bottom = self.ground_y
                 self.vel_y = 0
                 self.is_jumping = False
                 self.current_frame = 0
+        
         #lari
         else:
             self.animation_timer += 1 
@@ -115,6 +147,9 @@ class Sobi:
                     self.frames_run
                 )
             self.image = self.frames_run[self.current_frame]
+            self.rect = self.image.get_rect(bottomleft=(self.rect.left, self.ground_y))
+
+        
 
     def draw(self,screen):
         screen.blit(self.image, self.rect)
