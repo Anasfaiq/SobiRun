@@ -8,7 +8,7 @@
         "sprites": {
             "run": {
                 "file": "assets/images/RunSobi.png",
-                "frame_count": 8
+                "frame_count": 9
             },
             "jump_up": {
                 "file": "assets/images/SobiJumpUp.png",

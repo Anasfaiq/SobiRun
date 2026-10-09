@@ -27,13 +27,13 @@ class Sobi:
 
         #posisi awal
         self.image = self.frames_run[0]
-        self.rect = self.image.get_rect(topleft=(50, 280))
+        self.ground_y = 800
+        self.rect = self.image.get_rect(topleft=(50, self.ground_y))
 
         #move / pergerakan
         self.vel_y = 0
         self.jump_power = self.data["jump_power"]
         self.gravity = self.data["gravity"]
-        self.ground_y = 200
         self.is_jumping = False
 
     def load_data(self, char_id):
@@ -91,15 +91,15 @@ class Sobi:
                 self.vel_y = 0
                 self.is_jumping = False
                 self.current_frame = 0
-            #lari
-            else:
-                self.animation_timer += 1 
-                if self.animation_timer >= self.animation_speed:
-                    self.animation_timer = 0
-                    self.current_frame = (self.current_frame + 1) % len(
-                        self.frames_run
-                    )
-                self.image = self.frames_run[self.current_frame]
+        #lari
+        else:
+            self.animation_timer += 1 
+            if self.animation_timer >= self.animation_speed:
+                self.animation_timer = 0
+                self.current_frame = (self.current_frame + 1) % len(
+                    self.frames_run
+                )
+            self.image = self.frames_run[self.current_frame]
 
     def draw(self,screen):
         screen.blit(self.image, self.rect)
