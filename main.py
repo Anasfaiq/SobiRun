@@ -1,7 +1,7 @@
 import pygame
 import sys
 from random import randint
-from src.config import SCREEN_WIDTH, SCREEN_HEIGHT, MINIMIZE_WIDTH, MINIMIZE_HEIGHT, FPS, TITLE
+from src.config import SCREEN_WIDTH, SCREEN_HEIGHT, FPS, TITLE
 from src.ui import UI
 from src.states.score_manager import ScoreManager
 from src.character.background import Background
@@ -12,7 +12,7 @@ from src.character.obstacle import Obstacles
 def main():
     #initialisasi pygame
     pygame.init()
-    screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT), pygame.FULLSCREEN)
+    screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT),pygame.SCALED | pygame.FULLSCREEN)
     clock = pygame.time.Clock()
     pygame.display.set_caption(TITLE)
 
@@ -21,7 +21,7 @@ def main():
     score_mgr = ScoreManager()
     background = Background()
     char = Sobi()
-    obstacle = Obstacles()
+    # obstacle = Obstacles()
 
     #state game menu, playing
     game_state = "MENU"
@@ -33,8 +33,8 @@ def main():
 
     #deklarasi variabel
     running = True 
-    is_fullscreen = True
-
+    # is_fullscreen = True
+    pygame.time.set_timer(spawn_obstacle, randint(500, 700))
     #game Looping
     while running :
         #ketika menjalan kan gamenya 
@@ -42,30 +42,39 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
             
-            if event.type == spawn_obstacle:
+            if event.type == spawn_obstacle and game_state == "PLAYING":
                 obstacles.append(Obstacles())
-            pygame.time.set_timer(spawn_obstacle, randint(500, 700))
+                pygame.time.set_timer(spawn_obstacle, randint(1500, 3000))
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_F11:
-                    if is_fullscreen:
-                        screen = pygame.display.set_mode((MINIMIZE_WIDTH, MINIMIZE_HEIGHT), pygame.RESIZABLE)
-                    else:
-                        screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.FULLSCREEN)
+                    # if is_fullscreen:
+                    #     screen = pygame.display.set_mode((MINIMIZE_WIDTH, MINIMIZE_HEIGHT), pygame.RESIZABLE)
+                    #     is_fullscreen = False
+                    # else:
+                    pygame.display.toggle_fullscreen()
                 if game_state == "MENU" and event.key == pygame.K_SPACE:
                     score_mgr.reset_score()
-                    cbar = Sobi()
+                    char = Sobi()
                     game_state = "PLAYING"
+                    obstacles.clear()
                 elif game_state == "PLAYING":
                     if event.key in (pygame.K_SPACE, pygame.K_UP):
                         char.jump()
                     elif event.key == pygame.K_g:
+                        char.die()
                         score_mgr.on_game_over()
-                        game_state = "GAME_OVER"
+                        game_state = "DYING"
                 elif game_state == "GAME_OVER" and event.key == pygame.K_r:
                     score_mgr.reset_score()
                     char = Sobi()
                     game_state = "PLAYING"
+                    obstacles.clear()
+                elif game_state == "GAME_OVER" and event.key == pygame.K_m:
+                    score_mgr.reset_score()
+                    char = Sobi()
+                    game_state = "MENU"
+                    obstacles.clear()
  
 
         if game_state == "PLAYING":
@@ -84,17 +93,30 @@ def main():
             menu.draw_score(screen, score_mgr.get_score_int(), score_mgr.get_high_score_int())
             # render karakter sama obstacle disini 
             char.draw(screen)
-            for obs in obstacles:
+            
+            for obs in obstacles[:]:
                 obs.move()
-    
                 if obs.x < -100:
                     obstacles.remove(obs)
             
             for obs in obstacles:
                 obs.draw(screen)
+                #tabrakan
                 if char.get_hitbox().colliderect(obs.get_hitbox()):
+                    char.die()
                     score_mgr.on_game_over()
-                    game_state = "GAME_OVER"
+                    game_state = "DYING"
+                    
+        elif game_state == "DYING":
+            char.update()
+            background.draw(screen)
+            menu.draw_score(screen, score_mgr.get_score_int(), score_mgr.get_high_score_int())
+            char.draw(screen)
+            for obs in obstacles:
+                obs.draw(screen)
+            if char.death_finished():
+                score_mgr.on_game_over()
+                game_state = "GAME_OVER"
 
         elif game_state == "GAME_OVER":
             menu.game_over(screen, score_mgr.get_score_int(), score_mgr.get_high_score_int())
