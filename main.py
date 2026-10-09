@@ -7,6 +7,7 @@ from src.states.score_manager import ScoreManager
 from src.character.background import Background
 from src.character.dino import Sobi
 from src.character.obstacle import Obstacles
+from src.character.text_box import TextBox
 
 
 def main():
@@ -21,6 +22,7 @@ def main():
     score_mgr = ScoreManager()
     background = Background()
     char = Sobi()
+    textbox = TextBox("q")
     # obstacle = Obstacles()
 
     #state game menu, playing
@@ -104,6 +106,7 @@ def main():
                 #tabrakan
                 if char.get_hitbox().colliderect(obs.get_hitbox()):
                     char.die()
+                    textbox.draw(screen)
                     score_mgr.on_game_over()
                     game_state = "DYING"
                     

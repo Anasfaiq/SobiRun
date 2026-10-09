@@ -1,20 +1,256 @@
 [
     {
-        "id":1,
-        "q": "Berapakah hasil dari 5 + 7?",
-        "options": ["A. 18","B. 12","C. 14"],
-        "correct": 1
-    },
-    {
-        "id":2,
-        "q": "Bahasa pemrograman apa yang kita pakai?",
-        "options": ["A. Python","B. Java","C. C++"],
-        "correct": 0
-    },
-    {
-        "id":3,
-        "q": "Ibu Kota Indonesia Saat Ini?",
-        "options": ["A. Bandung","B. Jakarta","C. Nusantara"],
-        "correct": 2
+        "questions": {
+            "pertanyaan 1": {
+                "q": "Apa fungsi utama dari RAM (Random Access Memory) pada komputer?",
+                "options": ["A. Menyimpan data secara permanen", "B. Menyimpan data dan instruksi sementara saat program berjalan", "C. Mengolah grafis dan tampilan layar"],
+                "correct": 1
+            },
+            "pertanyaan 2": {
+                "q": "Urutan langkah-langkah yang logis dan tersusun secara sistematis untuk menyelesaikan suatu masalah disebut...",
+                "options": ["A. Algoritma", "B. Variabel", "C. Sintaks"],
+                "correct": 0
+            },
+            "pertanyaan 3": {
+                "q": "Manakah dari berikut ini yang merupakan contoh variabel bertipe data Integer?",
+                "options": ["A. 3.14", "B. \"Hello World\"", "C. 25"],
+                "correct": 2
+            },
+            "pertanyaan 4": {
+                "q": "Tipe data yang hanya memiliki dua nilai, yaitu True (Benar) dan False (Salah) adalah...",
+                "options": ["A. String", "B. Boolean", "C. Float"],
+                "correct": 1
+            },
+            "pertanyaan 5": {
+                "q": "Operator aritmatika yang digunakan untuk mencari sisa hasil bagi adalah...",
+                "options": ["A. /", "B. % (Modulo)", "C. ^"],
+                "correct": 1
+            },
+            "pertanyaan 6": {
+                "q": "Simbol belah ketupat (diamond) pada diagram alir (flowchart) digunakan untuk menunjukkan...",
+                "options": ["A. Proses hitungan", "B. Input/Output", "C. Keputusan (Decision)"],
+                "correct": 2
+            },
+            "pertanyaan 7": {
+                "q": "Struktur kontrol yang digunakan untuk menjalankan sekelompok instruksi secara berulang-ulang disebut...",
+                "options": ["A. Perulangan (Looping)", "B. Percabangan (Branching)", "C. Array"],
+                "correct": 0
+            },
+            "pertanyaan 8": {
+                "q": "Manakah dari nama variabel berikut yang salah menurut aturan penulisan variabel secara umum?",
+                "options": ["A. nama_mhs", "B. 123jumlah", "C. totalHarga"],
+                "correct": 1
+            },
+            "pertanyaan 9": {
+                "q": "Istilah debugging dalam dunia pemrograman berarti...",
+                "options": ["A. Menulis kode dari awal", "B. Menghapus seluruh file program", "C. Mencari dan memperbaiki kesalahan (error) pada kode"],
+                "correct": 2
+            },
+            "pertanyaan 10": {
+                "q": "Mengubah kode program tulisan manusia (source code) menjadi bahasa mesin (binary code) sekaligus secara keseluruhan dilakukan oleh...",
+                "options": ["A. Compiler", "B. Interpreter", "C. Linker"],
+                "correct": 0
+            },
+            "pertanyaan 11": {
+                "q": "Struktur data linear yang menyimpan elemen-elemen dengan tipe data sama pada lokasi memori yang berurutan adalah...",
+                "options": ["A. Tree", "B. Array", "C. Graph"],
+                "correct": 1
+            },
+            "pertanyaan 12": {
+                "q": "Prinsip kerja dari struktur data Stack (Tumpukan) adalah...",
+                "options": ["A. FIFO (First In First Out)", "B. LIFO (Last In First Out)", "C. Random Access"],
+                "correct": 1
+            },
+            "pertanyaan 13": {
+                "q": "Prinsip kerja dari struktur data Queue (Antrean) adalah...",
+                "options": ["A. FIFO (First In First Out)", "B. LIFO (Last In First Out)", "C. Priority Access"],
+                "correct": 0
+            },
+            "pertanyaan 14": {
+                "q": "Algoritma pencarian yang bekerja dengan cara membagi dua area pencarian secara berulang pada data yang sudah terurut adalah...",
+                "options": ["A. Linear Search", "B. Binary Search", "C. Bubble Search"],
+                "correct": 1
+            },
+            "pertanyaan 15": {
+                "q": "Algoritma pengurutan (sorting) dasar yang bekerja dengan cara membandingkan dan menukar elemen bertetangga secara berulang adalah...",
+                "options": ["A. Bubble Sort", "B. Quick Sort", "C. Merge Sort"],
+                "correct": 0
+            },
+            "pertanyaan 16": {
+                "q": "Struktur data non-linear yang terdiri dari Node (simpul) dan Edge (sisi) penghubung dinamakan...",
+                "options": ["A. Array", "B. Graph", "C. Stack"],
+                "correct": 1
+            },
+            "pertanyaan 17": {
+                "q": "Elemen paling atas pada struktur data Stack yang digunakan sebagai penanda akses dipanggil dengan istilah...",
+                "options": ["A. Head", "B. Tail", "C. Top"],
+                "correct": 2
+            },
+            "pertanyaan 18": {
+                "q": "Indeks awal dari sebuah Array pada mayoritas bahasa pemrograman modern (seperti C++, Java, Python) dimulai dari angka...",
+                "options": ["A. 0", "B. 1", "C. -1"],
+                "correct": 0
+            },
+            "pertanyaan 19": {
+                "q": "Proses menambahkan elemen baru ke dalam sebuah Queue biasanya disebut dengan operasi...",
+                "options": ["A. Push", "B. Enqueue", "C. Pop"],
+                "correct": 1
+            },
+            "pertanyaan 20": {
+                "q": "Struktur data hierarkis yang memiliki satu simpul induk (root) dan beberapa simpul anak (child) disebut...",
+                "options": ["A. Tree", "B. Queue", "C. Matrix"],
+                "correct": 0
+            },
+            "pertanyaan 21": {
+                "q": "Singkatan dari SQL adalah...",
+                "options": ["A. Structured Question Language", "B. Structured Query Language", "C. Sequential Query Language"],
+                "correct": 1
+            },
+            "pertanyaan 22": {
+                "q": "Perintah SQL yang digunakan untuk mengambil data dari suatu tabel basis data adalah...",
+                "options": ["A. SELECT", "B. INSERT", "C. UPDATE"],
+                "correct": 0
+            },
+            "pertanyaan 23": {
+                "q": "Kolom unik dalam suatu tabel yang mengidentifikasi secara pasti setiap baris record dinamakan...",
+                "options": ["A. Foreign Key", "B. Primary Key", "C. Index Key"],
+                "correct": 1
+            },
+            "pertanyaan 24": {
+                "q": "Perintah SQL DELETE termasuk ke dalam kelompok perintah...",
+                "options": ["A. DDL (Data Definition Language)", "B. DML (Data Manipulation Language)", "C. DCL (Data Control Language)"],
+                "correct": 1
+            },
+            "pertanyaan 25": {
+                "q": "Perintah SQL yang digunakan untuk membuat tabel baru adalah...",
+                "options": ["A. CREATE TABLE", "B. ADD TABLE", "C. MAKE TABLE"],
+                "correct": 0
+            },
+            "pertanyaan 26": {
+                "q": "Istilah baris data horizontal dalam sebuah tabel relasional biasa disebut juga dengan...",
+                "options": ["A. Attribute", "B. Record / Tuple", "C. Field"],
+                "correct": 1
+            },
+            "pertanyaan 27": {
+                "q": "Software yang digunakan untuk mengelola dan mengatur basis data (seperti MySQL, PostgreSQL) disebut...",
+                "options": ["A. DBMS", "B. Operating System", "C. IDE"],
+                "correct": 0
+            },
+            "pertanyaan 28": {
+                "q": "Klausa dalam SQL yang digunakan untuk menyaring baris data berdasarkan kondisi tertentu adalah...",
+                "options": ["A. ORDER BY", "B. GROUP BY", "C. WHERE"],
+                "correct": 2
+            },
+            "pertanyaan 29": {
+                "q": "Hubungan relasi antar tabel di mana satu record di tabel A terhubung ke banyak record di tabel B disebut relasi...",
+                "options": ["A. One-to-One", "B. One-to-Many", "C. Many-to-Many"],
+                "correct": 1
+            },
+            "pertanyaan 30": {
+                "q": "Perintah SQL untuk mengubah data yang sudah ada di dalam tabel adalah...",
+                "options": ["A. MODIFY", "B. ALTER", "C. UPDATE"],
+                "correct": 2
+            },
+            "pertanyaan 31": {
+                "q": "Protokol standar yang digunakan untuk mengirim dan menerima halaman web secara aman (terenkripsi) adalah...",
+                "options": ["A. HTTP", "B. HTTPS", "C. FTP"],
+                "correct": 1
+            },
+            "pertanyaan 32": {
+                "q": "Alamat unik berbasis angka yang mengidentifikasi setiap perangkat di jaringan komputer disebut...",
+                "options": ["A. MAC Address", "B. IP Address", "C. URL"],
+                "correct": 1
+            },
+            "pertanyaan 33": {
+                "q": "Perangkat jaringan yang berfungsi menghubungkan dua atau lebih jaringan yang berbeda subnet/domain dinamakan...",
+                "options": ["A. Switch", "B. Hub", "C. Router"],
+                "correct": 2
+            },
+            "pertanyaan 34": {
+                "q": "Lapisan paling bawah pada model OSI (OSI 7 Layers) adalah...",
+                "options": ["A. Physical Layer", "B. Data Link Layer", "C. Network Layer"],
+                "correct": 0
+            },
+            "pertanyaan 35": {
+                "q": "Sistem yang menerjemahkan nama domain (seperti google.com) menjadi IP Address dinamakan...",
+                "options": ["A. DHCP", "B. DNS", "C. NAT"],
+                "correct": 1
+            },
+            "pertanyaan 36": {
+                "q": "Topologi jaringan yang semua perangkatnya terhubung ke satu kabel pusat (backbone) dinamakan topologi...",
+                "options": ["A. Star", "B. Bus", "C. Ring"],
+                "correct": 1
+            },
+            "pertanyaan 37": {
+                "q": "Perintah pada Command Prompt/Terminal yang digunakan untuk menguji konektivitas antar dua perangkat dalam jaringan adalah...",
+                "options": ["A. ping", "B. ipconfig", "C. cd"],
+                "correct": 0
+            },
+            "pertanyaan 38": {
+                "q": "Protokol yang bertugas memberikan IP Address secara otomatis kepada perangkat pengguna di jaringan adalah...",
+                "options": ["A. DNS", "B. DHCP", "C. FTP"],
+                "correct": 1
+            },
+            "pertanyaan 39": {
+                "q": "Skema penulisan IP Address v4 (IPv4) terdiri dari berapa bit?",
+                "options": ["A. 16 bit", "B. 32 bit", "C. 64 bit"],
+                "correct": 1
+            },
+            "pertanyaan 40": {
+                "q": "Jenis jaringan komputer yang cakupan wilayahnya terbatas pada satu ruangan atau gedung dinamakan...",
+                "options": ["A. LAN", "B. MAN", "C. WAN"],
+                "correct": 0
+            },
+            "pertanyaan 41": {
+                "q": "Komponen inti dari sistem operasi yang mengelola sumber daya hardware dan komunikasi perangkat lunak dinamakan...",
+                "options": ["A. Shell", "B. Kernel", "C. Driver"],
+                "correct": 1
+            },
+            "pertanyaan 42": {
+                "q": "Manakah dari berikut ini yang merupakan contoh sistem operasi bersifat Open Source?",
+                "options": ["A. Windows", "B. Linux", "C. macOS"],
+                "correct": 1
+            },
+            "pertanyaan 43": {
+                "q": "Kondisi di mana dua atau lebih proses saling menunggu sumber daya (resource) satu sama lain sehingga tidak ada yang bisa berjalan disebut...",
+                "options": ["A. Multitasking", "B. Deadlock", "C. Paging"],
+                "correct": 1
+            },
+            "pertanyaan 44": {
+                "q": "Sistem bilangan yang hanya terdiri dari angka 0 dan 1 adalah...",
+                "options": ["A. Biner", "B. Oktal", "C. Heksadesimal"],
+                "correct": 0
+            },
+            "pertanyaan 45": {
+                "q": "Berapa hasil konversi dari angka biner 1010 ke dalam sistem bilangan desimal?",
+                "options": ["A. 8", "B. 10", "C. 12"],
+                "correct": 1
+            },
+            "pertanyaan 46": {
+                "q": "Eksekusi beberapa program atau proses secara bersamaan oleh CPU dinamakan...",
+                "options": ["A. Multitasking", "B. Formatting", "C. Booting"],
+                "correct": 0
+            },
+            "pertanyaan 47": {
+                "q": "Perangkat lunak (software) yang bertugas menghubungkan hardware khusus (seperti printer/VGA) dengan sistem operasi dinamakan...",
+                "options": ["A. Utility", "B. Driver", "C. Firmware"],
+                "correct": 1
+            },
+            "pertanyaan 48": {
+                "q": "Sistem file (File System) standar yang paling umum digunakan pada sistem operasi Windows modern adalah...",
+                "options": ["A. FAT32", "B. NTFS", "C. EXT4"],
+                "correct": 1
+            },
+            "pertanyaan 49": {
+                "q": "Tempat penyimpanan sementara pada CPU yang memiliki kecepatan akses tercepat dinamakan...",
+                "options": ["A. Register", "B. Harddisk", "C. Flashdisk"],
+                "correct": 0
+            },
+            "pertanyaan 50": {
+                "q": "Sistem bilangan yang berbasis 16 (menggunakan angka 0-9 dan huruf A-F) dinamakan...",
+                "options": ["A. Desimal", "B. Heksadesimal", "C. Oktal"],
+                "correct": 1
+            }
+        }
     }
 ]
