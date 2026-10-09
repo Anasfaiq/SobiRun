@@ -6,18 +6,23 @@ class Sobi:
         #load data dari json
         self.data = self.load_data(char_id)
 
+        #ukuran
+        self.scale = 2.0
+
         #memotong gambar sprite
         sprites_info = self.data["sprites"]
         self.frames_run = self.load_sprite_sheet(
-            sprites_info["run"]["file"], sprites_info["run"]["frame_count"]
+            sprites_info["run"]["file"], sprites_info["run"]["frame_count"], self.scale
         )
         self.frames_jump_up = self.load_sprite_sheet(
             sprites_info["jump_up"]["file"],
             sprites_info["jump_up"]["frame_count"],
+            self.scale,
         )
         self.frames_jump_fall = self.load_sprite_sheet(
             sprites_info["jump_fall"]["file"],
             sprites_info["jump_fall"]["frame_count"],
+            self.scale,
         )
 
         #animasi
@@ -44,7 +49,7 @@ class Sobi:
                     return char
         return characters[0]
 
-    def load_sprite_sheet(self, filepath, frame_count):
+    def load_sprite_sheet(self, filepath, frame_count, scale=1.0):
         sheet = pygame.image.load(filepath).convert_alpha()
         sheet_width = sheet.get_width()
         sheet_height = sheet.get_height()
@@ -55,6 +60,11 @@ class Sobi:
         for i in range(frame_count):
             rect = pygame.Rect(i * frame_width, 0, frame_width, sheet_height)
             frame = sheet.subsurface(rect)
+
+            # buat ubah ukuran
+            new_size = (int(frame_width * scale), int(sheet_height * scale))
+            frame = pygame.transform.scale(frame, new_size)
+
             frames.append(frame)
 
         return frames
