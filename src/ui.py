@@ -49,15 +49,18 @@ class UI:
         score_surf = self.small_font.render(f"Score Akhir: {score}", False, self.white)
         high_score_surf = self.small_font.render(f"High Score: {high_score}", False, self.white)
         restart_surf = self.small_font.render("Tekan R untuk Ulangi", False, self.white)
+        menu_surf = self.small_font.render("Tekan M untuk Main Menu",False, self.white)
 
         # mengambil posisi dan menyimpan nya ke variabel agar bisa di pakai di blit
         game_over_rect = game_over_surf.get_rect(center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 100))
         score_rect = score_surf.get_rect(center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2))
         high_score_rect = high_score_surf.get_rect(center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 50))
         restart_rect = restart_surf.get_rect(center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 100))
+        menu_rect = menu_surf.get_rect(center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 150))
 
         # menampilkan teks ke layar
         screen.blit(game_over_surf, game_over_rect)
         screen.blit(score_surf, score_rect)
         screen.blit(high_score_surf, high_score_rect)
         screen.blit(restart_surf, restart_rect)
+        screen.blit(menu_surf, menu_rect)
