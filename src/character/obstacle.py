@@ -13,7 +13,7 @@ class Obstacles:
     def __init__(self):
         self.jenis = randint(1, 3)
         self.x = SCREEN_WIDTH
-        self.speed = 15 * (SCREEN_WIDTH / 1920)
+        # self.speed = 15 * (SCREEN_WIDTH / 1920)
 
         if self.jenis == 1:
             self.width = int(40 * self.SCALE)
@@ -32,8 +32,8 @@ class Obstacles:
         self.y = self.GROUND_Y - self.height
         self.rect = pygame.Rect(int(self.x), self.y, self.width, self.height)
 
-    def move(self):
-        self.x -= self.speed
+    def move(self, speed):
+        self.x -= speed
         self.rect.x = int(self.x)
 
     def get_hitbox(self):

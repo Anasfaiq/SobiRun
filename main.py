@@ -25,6 +25,14 @@ def main():
     # textbox = TextBox("q")
     # obstacle = Obstacles()
 
+    # game speed
+    SCALE_X = SCREEN_WIDTH / 1920
+    BASE_SPEED = 15 * SCALE_X
+    MAX_SPEED = 30 * SCALE_X
+    SPEED_STEP = 1 * SCALE_X
+    BG_RATIO = 2 / 15
+    game_speed = BASE_SPEED
+
     #state game menu, playing
     game_state = "MENU"
 
@@ -33,6 +41,9 @@ def main():
     obstacles = []
 
     spawn_obstacle = pygame.USEREVENT + 1
+
+    # posisi mouse
+    mouse_pos = pygame.mouse.get_pos()
 
     #deklarasi variabel
     running = True 
@@ -103,6 +114,8 @@ def main():
  
 
         if game_state == "PLAYING":
+            score = score_mgr.get_score_int()
+            game_speed = min(BASE_SPEED + (score // 100) * SPEED_STEP, MAX_SPEED)
             #skor bertambah otomatis seiring waktu berjalan 
             background.update()
             score_mgr.update()
@@ -120,7 +133,7 @@ def main():
             char.draw(screen)
             
             for obs in obstacles[:]:
-                obs.move()
+                obs.move(game_speed)
                 if obs.x < -100:
                     obstacles.remove(obs)
             
