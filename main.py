@@ -22,12 +22,13 @@ def main():
     score_mgr = ScoreManager()
     background = Background()
     char = Sobi()
-    textbox = TextBox("q")
+    # textbox = TextBox("q")
     # obstacle = Obstacles()
 
     #state game menu, playing
     game_state = "MENU"
 
+    quit_after_death = False
     
     obstacles = []
 
@@ -55,6 +56,13 @@ def main():
                     #     is_fullscreen = False
                     # else:
                     pygame.display.toggle_fullscreen()
+                elif event.key == pygame.K_ESCAPE:
+                    if game_state == "PLAYING" and event.key == pygame.K_ESCAPE:
+                        char.die()
+                        game_state = "DYING"
+                        quit_after_death = True
+                    elif game_state in ("MENU", "GAME_OVER"):
+                        running = False
                 if game_state == "MENU" and event.key == pygame.K_SPACE:
                     score_mgr.reset_score()
                     char = Sobi()
@@ -65,8 +73,23 @@ def main():
                         char.jump()
                     elif event.key == pygame.K_g:
                         char.die()
-                        score_mgr.on_game_over()
                         game_state = "DYING"
+                elif game_state == "QUESTION":
+                    answer = None
+                    if event.key in (pygame.K_a, pygame.K_1):
+                        answer = 0
+                    elif event.key in (pygame.K_b, pygame.K_2):
+                        answer = 1
+                    elif event.key in (pygame.K_c, pygame.K_3):
+                        answer = 2
+
+                    if answer is not None:
+                        if textbox.is_correct(answer):
+                            obstacles.clear()
+                            game_state = "PLAYING"
+                        else:
+                            char.die()
+                            game_state = "DYING"
                 elif game_state == "GAME_OVER" and event.key == pygame.K_r:
                     score_mgr.reset_score()
                     char = Sobi()
@@ -105,10 +128,21 @@ def main():
                 obs.draw(screen)
                 #tabrakan
                 if char.get_hitbox().colliderect(obs.get_hitbox()):
-                    char.die()
-                    textbox.draw(screen)
-                    score_mgr.on_game_over()
-                    game_state = "DYING"
+                    textbox = TextBox(f"pertanyaan {randint(1, 50)}")
+                    game_state = "QUESTION"
+                    break
+                    # char.die()
+                    # textbox.draw(screen)
+                    # score_mgr.on_game_over()
+                    # game_state = "DYING"
+
+        elif game_state == "QUESTION":
+            background.draw(screen)
+            menu.draw_score(screen, score_mgr.get_score_int(), score_mgr.get_high_score_int())
+            char.draw(screen)
+            for obs in obstacles:
+                obs.draw(screen)
+            textbox.draw(screen)
                     
         elif game_state == "DYING":
             char.update()
@@ -119,7 +153,10 @@ def main():
                 obs.draw(screen)
             if char.death_finished():
                 score_mgr.on_game_over()
-                game_state = "GAME_OVER"
+                if quit_after_death:
+                    running = False
+                else:
+                    game_state = "GAME_OVER"
 
         elif game_state == "GAME_OVER":
             menu.game_over(screen, score_mgr.get_score_int(), score_mgr.get_high_score_int())
