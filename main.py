@@ -28,10 +28,14 @@ def main():
     # game speed
     SCALE_X = SCREEN_WIDTH / 1920
     BASE_SPEED = 15 * SCALE_X
-    MAX_SPEED = 30 * SCALE_X
-    SPEED_STEP = 1 * SCALE_X
+    MAX_SPEED = 100 * SCALE_X
+    SPEED_STEP = 20 * SCALE_X
     BG_RATIO = 2 / 15
     game_speed = BASE_SPEED
+
+    SLOW_ANIM = 5
+    FAST_ANIM = 2
+
 
     #state game menu, playing
     game_state = "MENU"
@@ -48,7 +52,7 @@ def main():
     #deklarasi variabel
     running = True 
     # is_fullscreen = True
-    pygame.time.set_timer(spawn_obstacle, randint(500, 700))
+    pygame.time.set_timer(spawn_obstacle, randint(1200, 3000))
     #game Looping
     while running :
         #ketika menjalan kan gamenya 
@@ -72,7 +76,7 @@ def main():
                         char.die()
                         game_state = "DYING"
                         quit_after_death = True
-                    elif game_state in ("MENU", "GAME_OVER"):
+                    elif game_state in ("MENU", "GAME_OVER","QUESTION"):
                         running = False
                 if game_state == "MENU" and event.key == pygame.K_SPACE:
                     score_mgr.reset_score()
@@ -116,8 +120,12 @@ def main():
         if game_state == "PLAYING":
             score = score_mgr.get_score_int()
             game_speed = min(BASE_SPEED + (score // 100) * SPEED_STEP, MAX_SPEED)
+
+            #proses animasi char cepet sesuai dengan score
+            progres = (game_speed - BASE_SPEED) / (MAX_SPEED - BASE_SPEED)
+            char.set_run_speed(SLOW_ANIM - progres * (SLOW_ANIM - FAST_ANIM))
             #skor bertambah otomatis seiring waktu berjalan 
-            background.update()
+            background.update(game_speed * BG_RATIO)
             score_mgr.update()
             char.update()
 
@@ -156,6 +164,10 @@ def main():
             for obs in obstacles:
                 obs.draw(screen)
             textbox.draw(screen)
+
+            if textbox.timeout():
+                char.die()
+                game_state = "DYING"
                     
         elif game_state == "DYING":
             char.update()

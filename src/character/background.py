@@ -4,7 +4,7 @@ from src.config import SCREEN_WIDTH, SCREEN_HEIGHT
 
 
 class Background:
-    def __init__(self, background_id="background", speed=2):
+    def __init__(self, background_id="background", speed=8):
         # load data dari json
         self.data = self.load_data(background_id)
 

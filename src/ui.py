@@ -35,8 +35,9 @@ class UI:
 
     def draw_score(self, screen, score, high_score):
         # render teks score ke surface
-        score_surf = self.small_font.render(f"Score: {score}", False, self.white)
-        high_score_surf = self.small_font.render(f"High Score: {high_score}", False, self.white)
+        self.choclate = (60, 42, 26) 
+        score_surf = self.small_font.render(f"Score: {score}", False, self.choclate)
+        high_score_surf = self.small_font.render(f"High Score: {high_score}", False, self.choclate)
 
         # mengambil posisi dari kedua surface dan menyimpan nya ke variabel agar bisa di pakai di blit
         score_rect = score_surf.get_rect(topright = (SCREEN_WIDTH - 20, 20))
