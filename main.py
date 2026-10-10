@@ -164,6 +164,10 @@ def main():
             for obs in obstacles:
                 obs.draw(screen)
             textbox.draw(screen)
+
+            if textbox.timeout():
+                char.die()
+                game_state = "DYING"
                     
         elif game_state == "DYING":
             char.update()
