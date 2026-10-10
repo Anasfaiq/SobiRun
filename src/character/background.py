@@ -30,10 +30,12 @@ class Background:
                     return item
         return items[0]
 
-    def update(self):
+    def update(self, speed=None):
+        if speed is None:
+            speed = self.speed
         # geser ke kiri
-        self.x1 -= self.speed
-        self.x2 -= self.speed
+        self.x1 -= speed
+        self.x2 -= speed
 
         # kalo satu gambar udah keluar layar, pindahin ke belakang gambar satunya
         if self.x1 <= -self.width:

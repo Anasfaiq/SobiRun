@@ -27,8 +27,11 @@ class UI:
 
         # membuat dan me-render text
         start_surf = self.small_font.render("Tekan Space untuk Mulai", False, self.white)
-        start_rect = start_surf.get_rect(center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT - 100))
+        # exit_surf = self.small_font.render("Exit", False, self.white)
+        start_rect = start_surf.get_rect(center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT - 50))
+        # exit_rect = exit_surf.get_rect(center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT + 100))
         screen.blit(start_surf, start_rect)
+        # screen.blit(exit_surf, exit_rect)
 
     def draw_score(self, screen, score, high_score):
         # render teks score ke surface
