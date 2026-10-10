@@ -35,7 +35,7 @@ class Sobi:
         #animasi
         self.current_frame = 0
         self.animation_timer = 0
-        self.animation_speed = 5
+        # self.animation_speed = 5
 
         #posisi awal
         self.image = self.frames_run[0]
@@ -76,6 +76,9 @@ class Sobi:
             frames.append(frame)
 
         return frames
+
+    def set_run_speed(self, speed):
+        self.animation_speed = max(1,int(speed))
 
     def jump(self):
         if not self.is_jumping:
