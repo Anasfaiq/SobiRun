@@ -29,7 +29,7 @@ def main():
     SCALE_X = SCREEN_WIDTH / 1920
     BASE_SPEED = 15 * SCALE_X
     MAX_SPEED = 100 * SCALE_X
-    SPEED_STEP = 20 * SCALE_X
+    SPEED_STEP = 5 * SCALE_X
     BG_RATIO = 2 / 15
     game_speed = BASE_SPEED
 
