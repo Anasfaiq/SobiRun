@@ -26,7 +26,7 @@ class Background:
         with open("assets/assets.json", "r") as f:
             items = json.load(f)
             for item in items:
-                if item["id"] == bg_id:
+                if item.get("id") == bg_id:
                     return item
         return items[0]
 

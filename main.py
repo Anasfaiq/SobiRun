@@ -17,7 +17,9 @@ def main():
     clock = pygame.time.Clock()
     pygame.display.set_caption(TITLE)
 
-    #inisialisasi main menu 
+    Obstacles.load_data()
+
+    #inisialisasi main menu  
     menu = UI()
     score_mgr = ScoreManager()
     background = Background()

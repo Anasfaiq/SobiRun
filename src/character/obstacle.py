@@ -1,5 +1,6 @@
+import json
 import pygame
-from random import randint
+from random import choice
 from src.config import SCREEN_WIDTH, SCREEN_HEIGHT
 
 
@@ -10,27 +11,43 @@ class Obstacles:
     # garis tanah (posisi bawah obstacle). Dari kodemu: 765 + 40 = 805
     GROUND_Y = int(805 * SCALE)
 
-    def __init__(self):
-        self.jenis = randint(1, 3)
-        self.x = SCREEN_WIDTH
-        # self.speed = 15 * (SCREEN_WIDTH / 1920)
+    ASSETS_DATA = {}
+    CACHED_IMAGES = {}
 
-        if self.jenis == 1:
-            self.width = int(40 * self.SCALE)
-            self.height = int(40 * self.SCALE)
-            self.color = (0, 0, 139)
-        elif self.jenis == 2:
-            self.width = int(30 * self.SCALE)
-            self.height = int(80 * self.SCALE)
-            self.color = (255, 200, 50)
-        elif self.jenis == 3:
-            self.width = int(40 * self.SCALE)
-            self.height = int(30 * self.SCALE)
-            self.color = (200, 50, 255)
+    @classmethod
+    def load_data(self):
+            with open("assets/assets.json","r") as f:
+                obstacles = json.load(f)
+                for obstacle in obstacles:
+                    if "obstacles" in obstacle:
+                        self.ASSETS_DATA = obstacle["obstacles"]
+                        break
+            for car_key, car_info in self.ASSETS_DATA.items():
+                self.CACHED_IMAGES[car_key] = pygame.image.load(car_info["path"]).convert_alpha()
+
+    def __init__(self):
+        car_keys = list(self.ASSETS_DATA.keys())
+        chosen_car_key = choice(car_keys)
+        car_info = self.ASSETS_DATA[chosen_car_key]
+
+        variant = choice(car_info["variants"])
+
+        sprite_sheet = self.CACHED_IMAGES[chosen_car_key]
+
+        crop_rect = pygame.Rect(variant["x"], variant["y"], variant["w"], variant["h"])
+        raw_image = sprite_sheet.subsurface(crop_rect)
+
+        flipped_image = pygame.transform.flip(raw_image, True, False)
+
+        size_multiplier = 3.3
+        self.width = int(variant["w"] * self.SCALE * size_multiplier)
+        self.height = int(variant["h"] * self.SCALE * size_multiplier)
+        self.image = pygame.transform.scale(flipped_image, (self.width, self.height))
 
         # semua obstacle berdiri di garis tanah yang sama
+        self.x = SCREEN_WIDTH
         self.y = self.GROUND_Y - self.height
-        self.rect = pygame.Rect(int(self.x), self.y, self.width, self.height)
+        self.rect = self.image.get_rect(topleft=(int(self.x), self.y))
 
     def move(self, speed):
         self.x -= speed
@@ -40,4 +57,4 @@ class Obstacles:
         return self.rect
 
     def draw(self, surface):
-        pygame.draw.rect(surface, self.color, self.rect)
+        surface.blit(self.image, self.rect)

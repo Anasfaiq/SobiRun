@@ -3,7 +3,7 @@
         "id": "sobiChar",
         "name": "Character Sobi",
         "speed": 5,
-        "jump_power": -15,
+        "jump_power": -18,
         "gravity": 0.8,
         "sprites": {
             "run": {
@@ -25,18 +25,36 @@
         }
     },
     {
+        "obstacles": {
+            "cars1": {
+                "path": "assets/images/cars1.png",
+                "variants": [
+                    {"color": "white", "x": 2, "y": 3, "w": 65, "h": 20},
+                    {"color": "brown", "x": 3, "y": 30, "w": 54, "h": 20},
+                    {"color": "blue", "x": 4, "y": 55, "w": 65, "h": 22}
+                ]
+            },
+            "cars2": {
+                "path": "assets/images/cars2.png",
+                "variants": [
+                    {"color": "black", "x": 6, "y": 3, "w": 61, "h": 20},
+                    {"color": "grey", "x": 7, "y": 30, "w": 59, "h": 20},
+                    {"color": "red", "x": 2, "y": 57, "w": 67, "h": 20}
+                ]
+            },
+            "cars3": {
+                "path": "assets/images/cars3.png",
+                "variants": [
+                    {"color": "dark_grey", "x": 5, "y": 2, "w": 59, "h": 27},
+                    {"color": "dark_blue", "x": 3, "y": 32, "w": 62, "h": 20},
+                    {"color": "maroon", "x": 11, "y": 55, "w": 50, "h": 20}
+                ]
+            }
+        }
+    },
+    {
         "id": "background",
         "name": "Background Game",
         "sprites": "assets/images/BackgroundBsi.png"
-    },
-    {
-        "id": "obstacle1",
-        "height": 10,
-        "width": 30
-    },
-    {
-        "id": "obstacle2",
-        "height": 20,
-        "width": 10
     }
 ]

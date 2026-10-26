@@ -8,7 +8,7 @@ class Sobi:
         self.data = self.load_data(char_id)
 
         #ukuran
-        self.scale = 2.8
+        self.scale = 2.5
 
         #memotong gambar sprite
         sprites_info = self.data["sprites"]
