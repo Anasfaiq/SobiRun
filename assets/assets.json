@@ -56,5 +56,15 @@
         "id": "background",
         "name": "Background Game",
         "sprites": "assets/images/BackgroundBsi.png"
+    },
+    {
+        "id": "playsound",
+        "name": "Background Play Sound",
+        "path": "assets/sounds/playbgm.wav"
+    },
+    {
+        "id": "menusound",
+        "name": "Background Menu Sound",
+        "path": "assets/sounds/menubgm.wav"
     }
 ]

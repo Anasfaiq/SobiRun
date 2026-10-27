@@ -8,6 +8,7 @@ from src.character.background import Background
 from src.character.dino import Sobi
 from src.character.obstacle import Obstacles
 from src.character.text_box import TextBox
+from src.config import load_sound
 
 
 def main():
@@ -18,6 +19,13 @@ def main():
     pygame.display.set_caption(TITLE)
 
     Obstacles.load_data()
+
+    #panggil menu dan play bgm
+    menu_sound = load_sound("menusound",volume=0.4)
+    play_sound = load_sound("playsound",volume=0.4)
+    if menu_sound:
+        menu_sound.play(-1)
+
 
     #inisialisasi main menu  
     menu = UI()
@@ -81,6 +89,11 @@ def main():
                     elif game_state in ("MENU", "GAME_OVER","QUESTION"):
                         running = False
                 if game_state == "MENU" and event.key == pygame.K_SPACE:
+
+                    
+                    menu_sound.stop()
+                    play_sound.play(-1)
+
                     score_mgr.reset_score()
                     char = Sobi()
                     game_state = "PLAYING"
@@ -109,11 +122,13 @@ def main():
                             game_state = "DYING"
                 elif game_state == "GAME_OVER" and event.key == pygame.K_r:
                     score_mgr.reset_score()
+                    play_sound.play(-1)
                     char = Sobi()
                     game_state = "PLAYING"
                     obstacles.clear()
                 elif game_state == "GAME_OVER" and event.key == pygame.K_m:
                     score_mgr.reset_score()
+                    menu_sound.play(-1)
                     char = Sobi()
                     game_state = "MENU"
                     obstacles.clear()
@@ -186,6 +201,7 @@ def main():
                     game_state = "GAME_OVER"
 
         elif game_state == "GAME_OVER":
+            play_sound.stop()
             menu.game_over(screen, score_mgr.get_score_int(), score_mgr.get_high_score_int())
 
         pygame.display.flip()
