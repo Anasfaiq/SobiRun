@@ -11,7 +11,7 @@ SCREEN_HEIGHT = 600
 FPS = 60
 
 TITLE = "SobiRun"
-TITLE_SCREEN = "assets/images/ltg.png"
+TITLE_SCREEN = "assets/images/titlemenu.png"
 
 
 

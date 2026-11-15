@@ -66,5 +66,46 @@
         "id": "menusound",
         "name": "Background Menu Sound",
         "path": "assets/sounds/menubgm.wav"
+    },
+    {
+        "id": "menu_button",
+        "name": "Button Menu Mulai Text",
+        "sprites":{
+            "start":{
+                "file":"assets/images/Button_Menu_Mulai2.png",
+                "frame_count":3
+            }  
+        }
+        
+    },
+    {
+        "id": "confirm_button",
+        "name": "Button Konfirmasi",
+        "sprites": "assets/images/button_konfirmasi.png"
+    },
+    {
+        "id": "quit_button_menu",
+        "name": "Button Keluar Di Menu",
+        "sprites": {
+            "quit":{
+                "file": "assets/images/Quit_Button_Menu.png",
+                "frame_count": 3
+            }
+        }
+    },
+    {
+        "id": "quit_button_simbol",
+        "name": "Button Keluar Di Game Over",
+        "sprites": "assets/images/Quit_Button1.png"
+    },
+    {
+        "id": "volume_button_simbol",
+        "name": "Button Atur Volume Di Menu",
+        "sprites": {
+            "volume":{
+                "file":"assets/images/Volume_Buttoon.png",
+                "frame_count": 6
+            }
+        }
     }
 ]
