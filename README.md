@@ -1,6 +1,6 @@
 # SobiRun
 
-**SobiRun is an endless running game inspired by Google's Dino Chrome. We built this as our semester project.**
+**SobiRun is an endless running game inspired by Google's Dino Chrome. We built this as our semester project**
 
 ---
 
