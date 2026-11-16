@@ -46,6 +46,10 @@ def main():
     SLOW_ANIM = 5
     FAST_ANIM = 2
 
+    muted = False
+    MENU_VOL = 0.4
+    PLAY_VOL = 0.4
+
 
     #state game menu, playing
     game_state = "MENU"
@@ -69,6 +73,23 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+
+            if game_state == "MENU":
+                action = menu.handle_click(event)
+                if action == "start":
+                    menu_sound.stop()
+                    play_sound.play(-1)
+                    score_mgr.reset_score()
+                    char = Sobi()
+                    obstacles.clear()
+                    game_state = "PLAYING"
+                elif action == "quit":
+                    running = False
+                elif action == "volume":
+                    muted = not muted
+                    menu_sound.set_volume(0 if muted else MENU_VOL)
+                    play_sound.set_volume(0 if muted else PLAY_VOL)
+
             
             if event.type == spawn_obstacle and game_state == "PLAYING":
                 obstacles.append(Obstacles())
@@ -88,9 +109,7 @@ def main():
                         quit_after_death = True
                     elif game_state in ("MENU", "GAME_OVER","QUESTION"):
                         running = False
-                if game_state == "MENU" and event.key == pygame.K_SPACE:
-
-                    
+                if game_state == "PLAYING":
                     menu_sound.stop()
                     play_sound.play(-1)
 
@@ -98,7 +117,6 @@ def main():
                     char = Sobi()
                     game_state = "PLAYING"
                     obstacles.clear()
-                elif game_state == "PLAYING":
                     if event.key in (pygame.K_SPACE, pygame.K_UP):
                         char.jump()
                     elif event.key == pygame.K_g:
@@ -150,7 +168,7 @@ def main():
 
         #render tampilan sesuai game_state
         if game_state == "MENU":
-            menu.main_menu(screen)
+            menu.main_menu(screen, muted)
         elif game_state == "PLAYING":
             background.draw(screen)
             menu.draw_score(screen, score_mgr.get_score_int(), score_mgr.get_high_score_int())
