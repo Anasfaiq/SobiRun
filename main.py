@@ -81,14 +81,29 @@ def main():
                     play_sound.play(-1)
                     score_mgr.reset_score()
                     char = Sobi()
-                    obstacles.clear()
                     game_state = "PLAYING"
+                    obstacles.clear()
                 elif action == "quit":
                     running = False
                 elif action == "volume":
                     muted = not muted
                     menu_sound.set_volume(0 if muted else MENU_VOL)
                     play_sound.set_volume(0 if muted else PLAY_VOL)
+
+            if game_state == "GAME_OVER":
+                action = menu.handle_game_over_click(event)
+                if action == "restart":
+                    score_mgr.reset_score()
+                    play_sound.play(-1)
+                    char = Sobi()
+                    game_state = "PLAYING"
+                    obstacles.clear()
+                elif action == "menu":
+                    score_mgr.reset_score()
+                    menu_sound.play(-1)
+                    char = Sobi()
+                    game_state = "MENU"
+                    obstacles.clear()
 
             
             if event.type == spawn_obstacle and game_state == "PLAYING":
@@ -110,13 +125,9 @@ def main():
                     elif game_state in ("MENU", "GAME_OVER","QUESTION"):
                         running = False
                 if game_state == "PLAYING":
-                    menu_sound.stop()
-                    play_sound.play(-1)
-
                     score_mgr.reset_score()
                     char = Sobi()
                     game_state = "PLAYING"
-                    obstacles.clear()
                     if event.key in (pygame.K_SPACE, pygame.K_UP):
                         char.jump()
                     elif event.key == pygame.K_g:
@@ -138,18 +149,6 @@ def main():
                         else:
                             char.die()
                             game_state = "DYING"
-                elif game_state == "GAME_OVER" and event.key == pygame.K_r:
-                    score_mgr.reset_score()
-                    play_sound.play(-1)
-                    char = Sobi()
-                    game_state = "PLAYING"
-                    obstacles.clear()
-                elif game_state == "GAME_OVER" and event.key == pygame.K_m:
-                    score_mgr.reset_score()
-                    menu_sound.play(-1)
-                    char = Sobi()
-                    game_state = "MENU"
-                    obstacles.clear()
  
 
         if game_state == "PLAYING":

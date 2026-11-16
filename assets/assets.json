@@ -81,7 +81,12 @@
     {
         "id": "confirm_button",
         "name": "Button Konfirmasi",
-        "sprites": "assets/images/button_konfirmasi.png"
+        "sprites": {
+            "confirm":{
+                "file":"assets/images/button_konfirmasi.png",
+                "frame_count": 6
+            }
+        }
     },
     {
         "id": "quit_button_menu",
@@ -96,7 +101,12 @@
     {
         "id": "quit_button_simbol",
         "name": "Button Keluar Di Game Over",
-        "sprites": "assets/images/Quit_Button1.png"
+        "sprites": {
+            "simbol":{
+                "file":"assets/images/Quit_Button1.png",
+                "frame_count": 3
+            }
+        }
     },
     {
         "id": "volume_button_simbol",

@@ -8,7 +8,9 @@ class UI:
             background_id="background", 
             quit_id= "quit_button_menu",
             mulai_id= "menu_button",
-            volume_id= "volume_button_simbol"
+            volume_id= "volume_button_simbol",
+            konfirm_id = "confirm_button",
+            quit_simbol_id = "quit_button_simbol"
         ):
         # ngatur font dan ukuran font disini
         self.small_font = pygame.font.Font('assets/fonts/Silkscreen/Silkscreen-Regular.ttf', 20)
@@ -38,6 +40,18 @@ class UI:
         self.frames_volume = self.load_sprite_sheet(
             sprites_info["volume"]["file"], sprites_info["volume"]["frame_count"], 60
         )
+
+        self.data = self.load_data(konfirm_id)
+        sprites_info = self.data["sprites"]
+        self.frames_confirm = self.load_sprite_sheet(
+            sprites_info["confirm"]["file"], sprites_info["confirm"]["frame_count"], 45
+        )
+
+        self.data = self.load_data(quit_simbol_id)
+        sprites_info = self.data["sprites"]
+        self.frames_quit_simbol = self.load_sprite_sheet(
+            sprites_info["simbol"]["file"], sprites_info["simbol"]["frame_count"], 45
+        )
         
 
         # buat ngeload title
@@ -53,6 +67,9 @@ class UI:
         self.start_rect = pygame.Rect(0, 0, 0, 0)
         self.quit_rect = pygame.Rect(0, 0, 0, 0)
         self.volume_rect = pygame.Rect(0, 0, 0, 0)
+
+        self.confirm_rect = pygame.Rect(0, 0, 0, 0)
+        self.quit_simbol_rect = pygame.Rect(0, 0, 0, 0)
 
     def load_data(self, bg_id):
         with open("assets/assets.json", "r") as f:
@@ -152,12 +169,16 @@ class UI:
         screen.blit(high_score_surf, high_score_rect)
 
     def game_over(self, screen, score, high_score):
+        #buat ngatur supaya bisa di klik 
+        mouse_pos = pygame.mouse.get_pos()
+        mouse_down = pygame.mouse.get_pressed()[0]
+
         # me-render teks ke surface
         game_over_surf = self.big_font.render("GAME OVER", False, self.red)
         score_surf = self.small_font.render(f"Score Akhir: {score}", False, self.white)
         high_score_surf = self.small_font.render(f"High Score: {high_score}", False, self.white)
-        restart_surf = self.small_font.render("Tekan R untuk Ulangi", False, self.white)
-        menu_surf = self.small_font.render("Tekan M untuk Main Menu",False, self.white)
+        restart_surf = self.small_font.render("Mau Ulangi? : ", False, self.white)
+        menu_surf = self.small_font.render("Main Menu :  ",False, self.white)
 
         # mengambil posisi dan menyimpan nya ke variabel agar bisa di pakai di blit
         game_over_rect = game_over_surf.get_rect(center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 100))
@@ -166,9 +187,26 @@ class UI:
         restart_rect = restart_surf.get_rect(center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 100))
         menu_rect = menu_surf.get_rect(center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 150))
 
+        #posisi di samping kanan 
+        gap = 20
+        self.confirm_rect = self.frames_confirm[0].get_rect(
+            midleft=(restart_rect.right + gap, restart_rect.centery))
+        self.quit_simbol_rect = self.frames_quit_simbol[0].get_rect(
+            midleft=(menu_rect.right + gap, menu_rect.centery))
+
         # menampilkan teks ke layar
         screen.blit(game_over_surf, game_over_rect)
         screen.blit(score_surf, score_rect)
         screen.blit(high_score_surf, high_score_rect)
         screen.blit(restart_surf, restart_rect)
         screen.blit(menu_surf, menu_rect)
+        screen.blit(self.pick_frame(self.frames_confirm, self.confirm_rect, mouse_pos, mouse_down), self.confirm_rect)
+        screen.blit(self.pick_frame(self.frames_quit_simbol, self.quit_simbol_rect, mouse_pos, mouse_down), self.quit_simbol_rect)
+
+    def handle_game_over_click(self, event):
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            if self.confirm_rect.collidepoint(event.pos):
+                return "restart"
+            if self.quit_simbol_rect.collidepoint(event.pos):
+                return "menu"
+        return None
